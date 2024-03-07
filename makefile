@@ -23,7 +23,7 @@ link:
 	$(CC) $(OBJ) -o bin/main.exe $(LDFLAGS)
 
 run:
-	export WINEDEBUG=-all,+randr
+	export WINEDEBUG=-all,+randr,-hid
 	wine ./bin/main.exe
 
 clean:
