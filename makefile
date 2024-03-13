@@ -1,6 +1,8 @@
 default-target: all
 .PHONY: default-target
 
+export WINEDEBUG=-all
+
 CC = x86_64-w64-mingw32-gcc
 CFLAGS = -std=c11 -O0 -Wall -Wextra -Wpedantic
 CFLAGS +=
@@ -23,7 +25,6 @@ link:
 	$(CC) $(OBJ) -o bin/main.exe $(LDFLAGS)
 
 run:
-	export WINEDEBUG=-all,+randr,-hid
 	wine ./bin/main.exe
 
 clean:

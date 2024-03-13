@@ -7,57 +7,73 @@
 #include <windows.h>
 #include <lmcons.h>
 
-int main(void) {
-	SYSTEM_INFO s;
-	GetSystemInfo(&s);
+void getDayOfWeekName(char weekName[10], SYSTEMTIME systemTime) {
+	const char* days[] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+	strcpy(weekName, days[systemTime.wDayOfWeek]);
+}
 
-	// processor type
-	char processorType[23];
-	switch (s.dwProcessorType) {
-		case 9:
-			strcpy(processorType, "x64 (Intel)");
-			break;
-		case 8664:
-			strcpy(processorType, "x64 (AMD64)");
-			break;
-		case 5:
-			strcpy(processorType, "ARM");
-			break;
-		case 12:
-			strcpy(processorType, "ARM64");
-			break;
-		case 6:
-			strcpy(processorType, "Based on Intel Itanium");
-			break;
-		case 0:
-			strcpy(processorType, "x86");
-			break;
-		case 0xffff:
-		default:
-			strcpy(processorType, "Unknown architecture");
-			break;
+void getMonthName(char monthName[10], SYSTEMTIME systemTime) {
+	const char* months[] = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+	strcpy(monthName, months[systemTime.wMonth - 1]);
+}
+
+long long unsigned int factorial(unsigned int n) {
+	if (n <= 1) return 1;
+	return n * factorial(n - 1);
+}
+
+
+int main(void) {
+	{
+		SYSTEMTIME systemTime;
+		GetSystemTime(&systemTime);
+
+		char dayOfWeekName[10];
+		getDayOfWeekName(dayOfWeekName, systemTime);
+		char monthName[10];
+		getMonthName(monthName, systemTime);
+
+		printf("%s, %d-%s-%d %02d:%02d:%02d\n", dayOfWeekName, systemTime.wDay, monthName, systemTime.wYear, systemTime.wHour, systemTime.wMinute, systemTime.wSecond);
+
+		GetLocalTime(&systemTime);
+		getDayOfWeekName(dayOfWeekName, systemTime);
+		getMonthName(monthName, systemTime);
+
+		printf("%s, %d-%s-%d %02d:%02d:%02d\n", dayOfWeekName, systemTime.wDay, monthName, systemTime.wYear, systemTime.wHour, systemTime.wMinute, systemTime.wSecond);
 	}
 
-	// computer name
-	unsigned long int computerNameSize = MAX_COMPUTERNAME_LENGTH + 1;
-	char computerName[computerNameSize];
-	GetComputerName(computerName, &computerNameSize);
+	{
+		ULONGLONG startTime = GetTickCount();
+		long long unsigned int res = factorial(10);
+		ULONGLONG endTime = GetTickCount() - startTime;
 
-	// user name
-	unsigned long int userNameSize = UNLEN + 1;
-	char userName[userNameSize];
-	GetUserName(userName, &userNameSize);
+		printf("factorial of 10 is: %llu\n", res);
 
-	// printing
-	printf("Processor type: %s\n", processorType);
-	printf("Number of processors: %ld\n", s.dwNumberOfProcessors);
-	printf("Page size: %ld\n", s.dwPageSize);
-	printf("Computer name: %s\n", computerName);
-	printf("User name: %s\n", userName);
-	printf("Active processor mask: %lld\n", s.dwActiveProcessorMask);
-	printf("Minimum application address: %p\n", s.lpMinimumApplicationAddress);
-	printf("Maximum application address: %p\n", s.lpMaximumApplicationAddress);
-	printf("Allocation granularity: %ld\n", s.dwAllocationGranularity);
-	printf("Processor level: %d\n", s.wProcessorLevel);
-	printf("Processor revision: %d\n", s.wProcessorRevision);
+		printf("execution time of factorial in milliseconds is: %llu\n", endTime);
+
+		startTime = GetTickCount();
+		Sleep(1000);
+		endTime = GetTickCount() - startTime;
+
+		printf("Sleep(1000) took: %llums\n", endTime);
+	}
+
+	{
+		LARGE_INTEGER frequency;
+		LARGE_INTEGER startTime;
+		LARGE_INTEGER endTime;
+
+		double elapsedTime;
+		QueryPerformanceFrequency(&frequency);
+		QueryPerformanceCounter(&startTime);
+
+		factorial(1000);
+
+		QueryPerformanceCounter(&endTime);
+
+		elapsedTime = (double)(endTime.QuadPart - startTime.QuadPart) /
+			frequency.QuadPart * 1000;
+
+		printf("factorial of 64 took: %lfms\n", elapsedTime);
+	}
 }
