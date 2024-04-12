@@ -2,15 +2,12 @@
 	"configurations": [
 		{
 			"name": "win",
-			"includePath": ["${workspaceFolder}/**"],
+			"includePath": [],
 			"defines": [],
-			"macFrameworkPath": [
-				"/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
-			],
-			"compilerPath": "/opt/homebrew/bin/x86_64-w64-mingw32-gcc",
 			"cStandard": "c17",
 			"cppStandard": "c++17",
-			"intelliSenseMode": "windows-gcc-x64"
+			"intelliSenseMode": "windows-gcc-x64",
+			"compilerPath": "/bin/x86_64-w64-mingw32-gcc"
 		}
 	],
 	"version": 4
