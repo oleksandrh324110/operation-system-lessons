@@ -7,7 +7,7 @@
 			"cStandard": "c17",
 			"cppStandard": "c++17",
 			"intelliSenseMode": "windows-gcc-x64",
-			"compilerPath": "/bin/x86_64-w64-mingw32-gcc"
+			"compilerPath": "x86_64-w64-mingw32-gcc"
 		}
 	],
 	"version": 4
