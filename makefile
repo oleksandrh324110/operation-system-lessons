@@ -57,10 +57,10 @@ RM = /opt/homebrew/Cellar/cmake/3.29.3/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/alex/dev/c/operation-system-lessons
+CMAKE_SOURCE_DIR = /Users/alex/dev/cpp/os-lessons
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/alex/dev/c/operation-system-lessons
+CMAKE_BINARY_DIR = /Users/alex/dev/cpp/os-lessons
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/alex/dev/c/operation-system-lessons/CMakeFiles /Users/alex/dev/c/operation-system-lessons//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/alex/dev/cpp/os-lessons/CMakeFiles /Users/alex/dev/cpp/os-lessons//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/alex/dev/c/operation-system-lessons/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/alex/dev/cpp/os-lessons/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -113,7 +113,7 @@ preinstall/fast:
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -P /Users/alex/dev/c/operation-system-lessons/CMakeFiles/VerifyGlobs.cmake
+	$(CMAKE_COMMAND) -P /Users/alex/dev/cpp/os-lessons/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
@@ -129,19 +129,6 @@ main: cmake_check_build_system
 main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
-
-#=============================================================================
-# Target rules for targets named run
-
-# Build rule for target.
-run: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run
-.PHONY : run
-
-# fast build rule for target.
-run/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/build
-.PHONY : run/fast
 
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
@@ -175,7 +162,6 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... run"
 	@echo "... main"
 	@echo "... src/main.obj"
 	@echo "... src/main.i"
@@ -191,7 +177,7 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -P /Users/alex/dev/c/operation-system-lessons/CMakeFiles/VerifyGlobs.cmake
+	$(CMAKE_COMMAND) -P /Users/alex/dev/cpp/os-lessons/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
